@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="链表," />
+  <meta name="keywords" content="二叉树," />
 
 
 
@@ -88,23 +88,21 @@
 
 
 
-<meta name="description" content="1.题目  2.解法 暴力解法解题思路：类似于两个数组的嵌套循环，找到公共的节点。 代码实现： 12345678910111213141516171819public class Solution &amp;#123;    public ListNode getIntersectionNode(ListNode headA, ListNode headB) &amp;#123;        ListNode">
+<meta name="description" content="1.题目 108题 将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。 本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。   109题 给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。 本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。     2.解法 108题——递归解题思路：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【剑指Offer】面试题52——两个链表的第一个公共节点">
-<meta property="og:url" content="http://zhengyurui.github.io/2020/04/20/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%91%E9%9D%A2%E8%AF%95%E9%A2%9852%E2%80%94%E2%80%94%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/index.html">
+<meta property="og:title" content="【LeetCode】108、109题——将有序数组、链表转化为二叉搜索树">
+<meta property="og:url" content="http://zhengyurui.github.io/2020/05/07/%E3%80%90LeetCode%E3%80%91108%E3%80%81109%E9%A2%98%E2%80%94%E2%80%94%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E3%80%81%E9%93%BE%E8%A1%A8%E8%BD%AC%E5%8C%96%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/index.html">
 <meta property="og:site_name" content="一只不爱搬砖的程序猿">
-<meta property="og:description" content="1.题目  2.解法 暴力解法解题思路：类似于两个数组的嵌套循环，找到公共的节点。 代码实现： 12345678910111213141516171819public class Solution &amp;#123;    public ListNode getIntersectionNode(ListNode headA, ListNode headB) &amp;#123;        ListNode">
-<meta property="og:image" content="http://zhengyurui.github.io/2020/04/20/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%91%E9%9D%A2%E8%AF%95%E9%A2%9852%E2%80%94%E2%80%94%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/image-20200420184432589.png">
-<meta property="og:image" content="http://zhengyurui.github.io/2020/04/20/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%91%E9%9D%A2%E8%AF%95%E9%A2%9852%E2%80%94%E2%80%94%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/image-20200420222202687.png">
-<meta property="og:image" content="http://zhengyurui.github.io/2020/04/20/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%91%E9%9D%A2%E8%AF%95%E9%A2%9852%E2%80%94%E2%80%94%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/image-20200420222811799.png">
-<meta property="og:image" content="http://zhengyurui.github.io/2020/04/20/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%91%E9%9D%A2%E8%AF%95%E9%A2%9852%E2%80%94%E2%80%94%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/image-20200420225705609.png">
-<meta property="og:image" content="http://zhengyurui.github.io/2020/04/20/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%91%E9%9D%A2%E8%AF%95%E9%A2%9852%E2%80%94%E2%80%94%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/image-20200420230353612.png">
-<meta property="article:published_time" content="2020-04-20T15:22:10.000Z">
-<meta property="article:modified_time" content="2020-05-01T14:47:59.185Z">
+<meta property="og:description" content="1.题目 108题 将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。 本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。   109题 给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。 本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。     2.解法 108题——递归解题思路：">
+<meta property="og:image" content="http://zhengyurui.github.io/2020/05/07/%E3%80%90LeetCode%E3%80%91108%E3%80%81109%E9%A2%98%E2%80%94%E2%80%94%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E3%80%81%E9%93%BE%E8%A1%A8%E8%BD%AC%E5%8C%96%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/1588864184.jpg">
+<meta property="og:image" content="http://zhengyurui.github.io/2020/05/07/%E3%80%90LeetCode%E3%80%91108%E3%80%81109%E9%A2%98%E2%80%94%E2%80%94%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E3%80%81%E9%93%BE%E8%A1%A8%E8%BD%AC%E5%8C%96%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/20200507231136.jpg">
+<meta property="og:image" content="http://zhengyurui.github.io/2020/05/07/%E3%80%90LeetCode%E3%80%91108%E3%80%81109%E9%A2%98%E2%80%94%E2%80%94%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E3%80%81%E9%93%BE%E8%A1%A8%E8%BD%AC%E5%8C%96%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/20200507233546.jpg">
+<meta property="article:published_time" content="2020-05-07T14:50:06.000Z">
+<meta property="article:modified_time" content="2020-05-08T07:41:38.575Z">
 <meta property="article:author" content="ZYR">
-<meta property="article:tag" content="链表">
+<meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://zhengyurui.github.io/2020/04/20/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%91%E9%9D%A2%E8%AF%95%E9%A2%9852%E2%80%94%E2%80%94%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/image-20200420184432589.png">
+<meta name="twitter:image" content="http://zhengyurui.github.io/2020/05/07/%E3%80%90LeetCode%E3%80%91108%E3%80%81109%E9%A2%98%E2%80%94%E2%80%94%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E3%80%81%E9%93%BE%E8%A1%A8%E8%BD%AC%E5%8C%96%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/1588864184.jpg">
 
 
 
@@ -134,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://zhengyurui.github.io/2020/04/20/【剑指Offer】面试题52——两个链表的第一个公共节点/"/>
+  <link rel="canonical" href="http://zhengyurui.github.io/2020/05/07/【LeetCode】108、109题——将有序数组、链表转化为二叉搜索树/"/>
 
 
 
 
 
-  <title>【剑指Offer】面试题52——两个链表的第一个公共节点 | 一只不爱搬砖的程序猿</title>
+  <title>【LeetCode】108、109题——将有序数组、链表转化为二叉搜索树 | 一只不爱搬砖的程序猿</title>
   
 
 
@@ -312,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhengyurui.github.io/2020/04/20/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%91%E9%9D%A2%E8%AF%95%E9%A2%9852%E2%80%94%E2%80%94%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/">
+    <link itemprop="mainEntityOfPage" href="http://zhengyurui.github.io/2020/05/07/%E3%80%90LeetCode%E3%80%91108%E3%80%81109%E9%A2%98%E2%80%94%E2%80%94%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E3%80%81%E9%93%BE%E8%A1%A8%E8%BD%AC%E5%8C%96%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZYR">
@@ -329,7 +327,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">【剑指Offer】面试题52——两个链表的第一个公共节点</h2>
+          <h2 class="post-title" itemprop="name headline">【LeetCode】108、109题——将有序数组、链表转化为二叉搜索树</h2>
         
 
         <div class="post-meta">
@@ -341,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-20T23:22:10+08:00">
-                2020-04-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-07T22:50:06+08:00">
+                2020-05-07
               </time>
             
 
@@ -364,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%91%E6%8C%87Offer/" itemprop="url" rel="index">
-                    <span itemprop="name">剑指Offer</span>
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
                   </a>
                 </span>
 
@@ -400,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  646
+                  1.2k
                 </span>
               
 
@@ -416,7 +414,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  5
                 </span>
               
             </div>
@@ -437,43 +435,64 @@
       
 
       
-        <h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1.题目"></a>1.题目</h2><img src="/2020/04/20/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%91%E9%9D%A2%E8%AF%95%E9%A2%9852%E2%80%94%E2%80%94%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/image-20200420184432589.png" class>
+        <h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1.题目"></a>1.题目</h2><ol>
+<li><p><strong>108题</strong></p>
+<p>将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。</p>
+<p>本题中，一个高度平衡二叉树是指一个二叉树<em>每个节点</em> 的左右两个子树的高度差的绝对值不超过 1。</p>
+<img src="/2020/05/07/%E3%80%90LeetCode%E3%80%91108%E3%80%81109%E9%A2%98%E2%80%94%E2%80%94%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E3%80%81%E9%93%BE%E8%A1%A8%E8%BD%AC%E5%8C%96%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/1588864184.jpg" class>
+</li>
+<li><p><strong>109题</strong></p>
+<p>给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。</p>
+<p>本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。</p>
+<img src="/2020/05/07/%E3%80%90LeetCode%E3%80%91108%E3%80%81109%E9%A2%98%E2%80%94%E2%80%94%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E3%80%81%E9%93%BE%E8%A1%A8%E8%BD%AC%E5%8C%96%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/20200507231136.jpg" class>
 
+</li>
+</ol>
 <h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2.解法"></a>2.解法</h2><ol>
-<li><h4 id="暴力解法"><a href="#暴力解法" class="headerlink" title="暴力解法"></a>暴力解法</h4><p><strong>解题思路</strong>：类似于两个数组的嵌套循环，找到公共的节点。</p>
-<p><strong>代码实现</strong>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        ListNode curA = headA, curB = headB;</span><br><span class="line">        <span class="comment">//两层循环</span></span><br><span class="line">        <span class="keyword">while</span>(curA != <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">while</span>(curB != <span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="comment">//找到相同节点，并返回该节点</span></span><br><span class="line">                <span class="keyword">if</span>(curA == curB)&#123;</span><br><span class="line">                    <span class="keyword">return</span> curB;</span><br><span class="line">                &#125;</span><br><span class="line">                curB = curB.next;</span><br><span class="line">            &#125;</span><br><span class="line">            curA = curA.next;</span><br><span class="line">            <span class="comment">//注意这里需要将curB复位到headB</span></span><br><span class="line">            curB = headB;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><h4 id="108题——递归"><a href="#108题——递归" class="headerlink" title="108题——递归"></a>108题——递归</h4><p><strong>解题思路</strong>：</p>
+<ul>
+<li>类似于二分法，数组两边边界下标，取中值mid，mid下标所在的数值及为二叉树的根节点。</li>
+<li>取mid下标左段和右段数组段进行递归计算。</li>
+</ul>
+<p><strong>注意</strong>：</p>
+<ul>
+<li><p>若 mid = (left + right) / 2 可能会造成数值越界（数组中出现 <em>int</em> 型的最大值最小值的情况），所以取mid = left + (right - left) / 2 会更为安全。</p>
+</li>
+<li><p>该题答案不唯一。<strong>当数组段长度为偶数时</strong>，mid = left + (right - left) / 2 默认取下界，取其上界作为root节点的值也是满足二叉搜索树要求的。 </p>
+<img src="/2020/05/07/%E3%80%90LeetCode%E3%80%91108%E3%80%81109%E9%A2%98%E2%80%94%E2%80%94%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E3%80%81%E9%93%BE%E8%A1%A8%E8%BD%AC%E5%8C%96%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/20200507233546.jpg" class>  
 
-<p><strong>执行结果</strong>：<img src="/2020/04/20/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%91%E9%9D%A2%E8%AF%95%E9%A2%9852%E2%80%94%E2%80%94%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/image-20200420222202687.png" class></p>
-<p><strong>时间复杂度</strong>：<em>O(n</em> * <em>m</em>)</p>
-<p><strong>空间复杂度</strong>：<em>O(1)</em></p>
+</li>
+</ul>
+<p><strong>代码实现</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">sortedArrayToBST</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> convertToBST(nums, <span class="number">0</span>, nums.length-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">convertToBST</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(left &gt; right) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        TreeNode root = <span class="keyword">new</span> TreeNode(nums[mid]);</span><br><span class="line">        root.left = convertToBST(nums, left, mid-<span class="number">1</span>);</span><br><span class="line">        root.right = convertToBST(nums, mid+<span class="number">1</span>,right);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>时间复杂度</strong>：<strong><em>O(N)</em></strong> ，每个元素只访问一次。</p>
+<p><strong>空间复杂度</strong>：<strong><em>O(log N)</em></strong> ，二叉搜索树空间 <em>O(N)</em> ，递归栈深度 <em>O(log N)</em>。</p>
 <hr>
 </li>
-<li><h4 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h4><p><strong>解题思路</strong>：创建哈希表，将headA放入哈希表中，在哈希表中查找与headB公共的headA节点。</p>
+<li><h4 id="109题——快慢指针"><a href="#109题——快慢指针" class="headerlink" title="109题——快慢指针"></a>109题——快慢指针</h4><p><strong>解题思路</strong>：</p>
+<ul>
+<li>定义一个快指针 fast 和一个慢指针 slow，慢指针一次走一步，快指针一次走两步，这样当快指针走到链表末尾，慢指针刚好在链表的中间位置，取slow所在链表的值为根节点的值。</li>
+<li>以 slow 所在节点为分界点，链表起点到 slow 前一个节点为左段，slow 后一个节点到链表末尾为右段，左右两段再进行递归计算。</li>
+</ul>
 <p><strong>代码实现</strong>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建HashMap,key为ListNode类，value为Boolean型</span></span><br><span class="line">        HashMap&lt;ListNode, Boolean&gt; map = <span class="keyword">new</span> HashMap&lt;ListNode, Boolean&gt;();</span><br><span class="line">        ListNode curA = headA;</span><br><span class="line">        ListNode curB = headB;</span><br><span class="line">        <span class="comment">//遍历链表A并存储</span></span><br><span class="line">        <span class="keyword">while</span>(curA != <span class="keyword">null</span>)&#123;</span><br><span class="line">            map.put(curA, <span class="keyword">true</span>);</span><br><span class="line">            curA = curA.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//在哈希表中查找公共节点</span></span><br><span class="line">        <span class="keyword">while</span>(curB != <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(map.containsKey(curB))&#123;</span><br><span class="line">                <span class="keyword">return</span> curB;</span><br><span class="line">            &#125;</span><br><span class="line">            curB = curB.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">sortedListToBST</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(head.next == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">new</span> TreeNode(head.val);</span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        ListNode fast = head;</span><br><span class="line">        ListNode pre = head;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(fast != <span class="keyword">null</span> &amp;&amp; fast.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(pre.next != slow)&#123;</span><br><span class="line">            pre = pre.next;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode root = <span class="keyword">new</span> TreeNode(slow.val);</span><br><span class="line">        ListNode headRight = slow.next;</span><br><span class="line">        <span class="comment">//对slow左段进行分割，即断开slow前一个节点pre对slow节点的引用</span></span><br><span class="line">        pre.next = <span class="keyword">null</span>;</span><br><span class="line">        root.left = sortedListToBST(head);</span><br><span class="line">        root.right = sortedListToBST(headRight);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>执行结果</strong>：<img src="/2020/04/20/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%91%E9%9D%A2%E8%AF%95%E9%A2%9852%E2%80%94%E2%80%94%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/image-20200420222811799.png" class></p>
-<p><strong>时间复杂度</strong>：<em>O(n)</em></p>
-<p><strong>空间复杂度</strong>：<em>O(n)</em></p>
-<hr>
+<p><strong>时间复杂度</strong>：<strong><em>O(N log N)</em></strong> ，假设每个链表含有 <em>N</em> 个节点，要得到其中间节点，需要 <em>N / 2</em> 步；将链表分为两个子链表时，找到两个子链表的中间节点则需 2 <em>（N / 4）步，依次类推，每次需要的步数总和为：<br>$$<br>\frac{N}{2}+2\cdot\frac{N}{4}+4\cdot\frac{N}{8}+8\cdot\frac{N}{16}+…<br>$$<br>而每次将列表分成一半，需要 *log N</em> 的时间结束，因此上面的式子可以写成：<br>$$<br>\sum_{i=1}^{log N}{2^{i-1}\cdot}\frac{N}{2^i}=\sum_{i=1}^{log N}{\frac{N}{2}}=\frac{N}{2} logN=O(NlogN)<br>$$</p>
 </li>
-<li><h4 id="快慢指针"><a href="#快慢指针" class="headerlink" title="快慢指针"></a>快慢指针</h4><p><strong>解题思路</strong>：计算两链表节点个数之差<em>n</em>，将长链表指针右移<em>n</em>步，然后两链表同时向后查找公共节点。</p>
-<p><strong>代码实现</strong>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(headA == <span class="keyword">null</span> || headB == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">        ListNode curA = headA, curB = headB;</span><br><span class="line">        <span class="comment">//计数器计量链表A长度</span></span><br><span class="line">        <span class="keyword">while</span>(curA.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">            curA = curA.next;</span><br><span class="line">            n++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//计数器累减计算A、B两表长度差</span></span><br><span class="line">        <span class="keyword">while</span>(curB.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">            curB = curB.next;</span><br><span class="line">            n--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果A、B链表尾结点不相等，说明不存在公共节点</span></span><br><span class="line">        <span class="keyword">if</span>(curA != curB) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        curA = n &gt; <span class="number">0</span> ? headA : headB;</span><br><span class="line">        curB = curA == headA ? headB : headA;</span><br><span class="line">        <span class="comment">//计数器可能为负值，需要取绝对值！</span></span><br><span class="line">        n = Math.abs(n);</span><br><span class="line">        <span class="comment">//长链表指针右移n步</span></span><br><span class="line">        <span class="keyword">while</span>(n &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            curA = curA.next;</span><br><span class="line">            n--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//两表同时遍历</span></span><br><span class="line">        <span class="keyword">while</span>(curA != curB)&#123;</span><br><span class="line">            curA = curA.next;</span><br><span class="line">            curB = curB.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> curA;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</ol>
+<pre><code>**空间复杂度**：***O(log N)*** 
 
-<p><strong>执行结果</strong>：<img src="/2020/04/20/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%91%E9%9D%A2%E8%AF%95%E9%A2%9852%E2%80%94%E2%80%94%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/image-20200420225705609.png" class></p>
-<p><strong>时间复杂度</strong>：<em>O(n+m)</em></p>
-<p><strong>空间复杂度</strong>：<em>O(1)</em></p>
-<hr>
-</li>
-<li><h4 id="双指针（最浪漫的相遇）"><a href="#双指针（最浪漫的相遇）" class="headerlink" title="双指针（最浪漫的相遇）"></a>双指针（最浪漫的相遇）</h4><p><strong>解题思路</strong>：链表A的指针遍历完链表A后，接着遍历链表B；链表B的指针遍历完链表B后，接着遍历链表A；若存在公共节点，则两个指针相遇的时候，即为公共节点所在。</p>
+---</code></pre><ol start="3">
+<li><h4 id="109题——将链表转化为数组，再递归"><a href="#109题——将链表转化为数组，再递归" class="headerlink" title="109题——将链表转化为数组，再递归"></a>109题——将链表转化为数组，再递归</h4><p><strong>解题思路</strong>：</p>
+<ul>
+<li>将链表转化为数组，后递归实现二叉搜索树。</li>
+</ul>
 <p><strong>代码实现</strong>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        ListNode h1 = headA, h2 = headB;</span><br><span class="line">        <span class="keyword">while</span>(h1 != h2)&#123;</span><br><span class="line">            h1 = h1 == <span class="keyword">null</span> ? headB : h1.next;</span><br><span class="line">            h2 = h2 == <span class="keyword">null</span> ? headA : h2.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> h1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">sortedListToBST</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; list = convertToArray(head);</span><br><span class="line">        <span class="keyword">return</span> listToBST(list, <span class="number">0</span>, list.size()-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">listToBST</span><span class="params">(List&lt;Integer&gt; list, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(left &gt; right) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        TreeNode root = <span class="keyword">new</span> TreeNode(list.get(mid));</span><br><span class="line">        root.left = listToBST(list, left, mid-<span class="number">1</span>);</span><br><span class="line">        root.right = listToBST(list, mid+<span class="number">1</span>, right);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">convertToArray</span><span class="params">(ListNode head)</span></span>&#123;</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">while</span>(head != <span class="keyword">null</span>)&#123;</span><br><span class="line">            list.add(head.val);</span><br><span class="line">            head = head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>执行结果</strong>：<img src="/2020/04/20/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%91%E9%9D%A2%E8%AF%95%E9%A2%9852%E2%80%94%E2%80%94%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/image-20200420230353612.png" class></p>
-<p><strong>时间复杂度</strong>：<em>O(n+m)</em></p>
-<p><strong>空间复杂度</strong>：<em>O(1)</em></p>
+<p><strong>时间复杂度</strong>：<strong><em>O(N)</em></strong> ，因为将链表转化为数组，取中间元素的开销变成了 <em>O(1)</em> ，整体时间复杂度下降。</p>
+<p><strong>空间复杂度</strong>：<strong><em>O(N)</em></strong> ，因为创建数组的开销，以空间换时间，相较于之前的空间复杂度 <em>O(log N)</em> 有所提升。</p>
 </li>
 </ol>
 
@@ -502,7 +521,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag"># 链表</a>
+            <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag"># 二叉树</a>
           
         </div>
       
@@ -515,8 +534,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/22/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" rel="next" title="我的第一篇博客">
-                <i class="fa fa-chevron-left"></i> 我的第一篇博客
+              <a href="/2020/05/01/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%91%E9%9D%A2%E8%AF%95%E9%A2%9816%E2%80%94%E2%80%94%20%E6%95%B0%E5%80%BC%E7%9A%84%E6%95%B4%E6%95%B0%E6%AC%A1%E6%96%B9/" rel="next" title="【剑指Offer】面试题16—— 数值的整数次方">
+                <i class="fa fa-chevron-left"></i> 【剑指Offer】面试题16—— 数值的整数次方
               </a>
             
           </div>
@@ -524,10 +543,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/05/01/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%91%E9%9D%A2%E8%AF%95%E9%A2%9816%E2%80%94%E2%80%94%20%E6%95%B0%E5%80%BC%E7%9A%84%E6%95%B4%E6%95%B0%E6%AC%A1%E6%96%B9/" rel="prev" title="【剑指Offer】面试题16—— 数值的整数次方">
-                【剑指Offer】面试题16—— 数值的整数次方 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -680,7 +695,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-题目"><span class="nav-number">1.</span> <span class="nav-text">1.题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-解法"><span class="nav-number">2.</span> <span class="nav-text">2.解法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#暴力解法"><span class="nav-number">2.0.1.</span> <span class="nav-text">暴力解法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#哈希表"><span class="nav-number">2.0.2.</span> <span class="nav-text">哈希表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快慢指针"><span class="nav-number">2.0.3.</span> <span class="nav-text">快慢指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双指针（最浪漫的相遇）"><span class="nav-number">2.0.4.</span> <span class="nav-text">双指针（最浪漫的相遇）</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-题目"><span class="nav-number">1.</span> <span class="nav-text">1.题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-解法"><span class="nav-number">2.</span> <span class="nav-text">2.解法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#108题——递归"><span class="nav-number">2.0.1.</span> <span class="nav-text">108题——递归</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#109题——快慢指针"><span class="nav-number">2.0.2.</span> <span class="nav-text">109题——快慢指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#109题——将链表转化为数组，再递归"><span class="nav-number">2.0.3.</span> <span class="nav-text">109题——将链表转化为数组，再递归</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
