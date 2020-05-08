@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>【剑指Offer】面试题16—— 数值的整数次方</title>
+    <url>/2020/05/01/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%91%E9%9D%A2%E8%AF%95%E9%A2%9816%E2%80%94%E2%80%94%20%E6%95%B0%E5%80%BC%E7%9A%84%E6%95%B4%E6%95%B0%E6%AC%A1%E6%96%B9/</url>
+    <content><![CDATA[<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1.题目"></a>1.题目</h2><p>​        <strong>实现函数double Power(double base, int exponent)，求base的exponent次方。不得使用库函数，同时不需要考虑大数问题。</strong></p>
+<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2.解法"></a>2.解法</h2><ol>
+<li><h4 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h4><p><strong>解题思路</strong>：我们可以将幂 <em>n</em> 表示成二进制的形式，比如若 <em>n</em> = 9，用二进制表示为 1001</p>
+<p>1001 = 1 x 1 + 0 x 2 + 0 x 4 + 1 x 8 = 1 x 2<sup>0</sup> + 0 x 2<sup>1</sup> + 0 x 2<sup>2</sup> + 1 x 2<sup>3</sup></p>
+</li>
+</ol>
+<p>​            x<sup>n</sup> = x<sup>9</sup> = x<sup>1x1</sup> + x<sup>0x2</sup> + x<sup>0x4</sup> + x<sup>1x8</sup></p>
+<p>   所以将 <em>n</em> 用二进制表示，可以通过位运算进行幂次计算。应用 &amp; 和 &gt;&gt; 可以得到 <em>n</em> 的每一位的 1。</p>
+<p>   <u>需要注意的是：<em>n</em> 为 <em>Int</em> 型，其存储范围为-2147483648~2147483647，我们将负值 <em>n</em> 转化成正值计算，如果 <em>n</em> = -2147483648，取绝对值则会产生越界情况，因此将 <em>n</em> 储存为 <em>long</em> 型。</u></p>
+<h5 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a><strong>代码实现</strong>：</h5>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">myPow</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> res = <span class="number">1.0</span>;</span><br><span class="line">           <span class="comment">//将n储存为long型，避免数值越界</span></span><br><span class="line">        <span class="keyword">long</span> b = n;</span><br><span class="line">           <span class="comment">//避免后续 x=1/x 报错</span></span><br><span class="line">        <span class="keyword">if</span>(x == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">           <span class="comment">//如果b&lt;0就转化为正值，方便后面统一计算</span></span><br><span class="line">        <span class="keyword">if</span>(b &lt; <span class="number">0</span>)&#123;</span><br><span class="line">               b = -b;</span><br><span class="line">               x = <span class="number">1</span> / x;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">while</span>(b &gt; <span class="number">0</span>)&#123;</span><br><span class="line">               <span class="comment">//</span></span><br><span class="line">               <span class="keyword">if</span>((b &amp; <span class="number">1</span>) == <span class="number">1</span>)&#123;</span><br><span class="line">                   res = res * x;</span><br><span class="line">               &#125;</span><br><span class="line">               x = x * x;</span><br><span class="line">               b = b &gt;&gt; <span class="number">1</span>;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">return</span> res;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>   <strong>时间复杂度</strong>：<em>O(log n)</em> （类似于二分法）</p>
+<p>   <strong>空间复杂度</strong>：<em>O(1)</em></p>
+<hr>
+<ol start="2">
+<li><h4 id="递归法"><a href="#递归法" class="headerlink" title="递归法"></a>递归法</h4><p><strong>解题思路</strong>：</p>
+<p>如果 x = 2, n = 8，x<sup>n</sup> = 2<sup>8</sup> = 2<sup>4</sup> * 2<sup>4</sup> = 2<sup>2</sup> * 2<sup>2</sup> * 2<sup>2</sup> * 2<sup>2</sup> = 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2</p>
+<p><strong>代码实现</strong>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">myPow</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(n == -<span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>/x;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">1</span>) <span class="keyword">return</span> x;</span><br><span class="line">        <span class="keyword">if</span>(n &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">double</span> temp = myPow(x, n/<span class="number">2</span>);</span><br><span class="line">            <span class="comment">//如果n为奇数，需要再多乘一个x</span></span><br><span class="line">            <span class="keyword">if</span>(n % <span class="number">2</span> == <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> temp * temp;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> temp * temp * x;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//如果n为int的最小值-2147483648，转换成最大值2147483647后还需要多乘一个x</span></span><br><span class="line">            <span class="keyword">if</span>(n == Integer.MIN_VALUE)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span> / (myPow(x, Integer.MAX_VALUE) * x);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span> / myPow(x, Math.abs(n));</span><br><span class="line">            &#125;</span><br><span class="line">     &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>时间复杂度</strong>：<em>O(log n)</em> </p>
+<p><strong>空间复杂度</strong>：<em>O(1)</em></p>
+</li>
+</ol>
+<p>​        </p>
+<p>​        </p>
+]]></content>
+      <tags>
+        <tag>位运算 递归</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2020/03/22/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
@@ -45,7 +79,7 @@
 <li><p>若 mid = (left + right) / 2 可能会造成数值越界（数组中出现 <em>int</em> 型的最大值最小值的情况），所以取mid = left + (right - left) / 2 会更为安全。</p>
 </li>
 <li><p>该题答案不唯一。<strong>当数组段长度为偶数时</strong>，mid = left + (right - left) / 2 默认取下界，取其上界作为root节点的值也是满足二叉搜索树要求的。 </p>
-<img src="/2020/05/07/%E3%80%90LeetCode%E3%80%91108%E3%80%81109%E9%A2%98%E2%80%94%E2%80%94%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E3%80%81%E9%93%BE%E8%A1%A8%E8%BD%AC%E5%8C%96%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/20200507233546.jpg" class> 
+<img src="/2020/05/07/%E3%80%90LeetCode%E3%80%91108%E3%80%81109%E9%A2%98%E2%80%94%E2%80%94%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E3%80%81%E9%93%BE%E8%A1%A8%E8%BD%AC%E5%8C%96%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/20200507233546.jpg" class> <img src="/2020/05/07/%E3%80%90LeetCode%E3%80%91108%E3%80%81109%E9%A2%98%E2%80%94%E2%80%94%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E3%80%81%E9%93%BE%E8%A1%A8%E8%BD%AC%E5%8C%96%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/20200507233557.jpg" class>
 
 </li>
 </ul>
@@ -65,11 +99,9 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">sortedListToBST</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(head.next == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">new</span> TreeNode(head.val);</span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        ListNode fast = head;</span><br><span class="line">        ListNode pre = head;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(fast != <span class="keyword">null</span> &amp;&amp; fast.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(pre.next != slow)&#123;</span><br><span class="line">            pre = pre.next;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode root = <span class="keyword">new</span> TreeNode(slow.val);</span><br><span class="line">        ListNode headRight = slow.next;</span><br><span class="line">        <span class="comment">//对slow左段进行分割，即断开slow前一个节点pre对slow节点的引用</span></span><br><span class="line">        pre.next = <span class="keyword">null</span>;</span><br><span class="line">        root.left = sortedListToBST(head);</span><br><span class="line">        root.right = sortedListToBST(headRight);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>时间复杂度</strong>：<strong><em>O(N log N)</em></strong> ，假设每个链表含有 <em>N</em> 个节点，要得到其中间节点，需要 <em>N / 2</em> 步；将链表分为两个子链表时，找到两个子链表的中间节点则需 2 <em>（N / 4）步，依次类推，每次需要的步数总和为：<br>$$<br>\frac{N}{2}+2\cdot\frac{N}{4}+4\cdot\frac{N}{8}+8\cdot\frac{N}{16}+…<br>$$<br>而每次将列表分成一半，需要 *log N</em> 的时间结束，因此上面的式子可以写成：<br>$$<br>\sum_{i=1}^{log N}{2^{i-1}\cdot}\frac{N}{2^i}=\sum_{i=1}^{log N}{\frac{N}{2}}=\frac{N}{2} logN=O(NlogN)<br>$$</p>
+<p><strong>空间复杂度</strong>：<strong><em>O(log N)</em></strong> </p>
+<hr>
 </li>
-</ol>
-<pre><code>**空间复杂度**：***O(log N)*** 
-
----</code></pre><ol start="3">
 <li><h4 id="109题——将链表转化为数组，再递归"><a href="#109题——将链表转化为数组，再递归" class="headerlink" title="109题——将链表转化为数组，再递归"></a>109题——将链表转化为数组，再递归</h4><p><strong>解题思路</strong>：</p>
 <ul>
 <li>将链表转化为数组，后递归实现二叉搜索树。</li>
@@ -87,40 +119,6 @@
       </categories>
       <tags>
         <tag>二叉树</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【剑指Offer】面试题16—— 数值的整数次方</title>
-    <url>/2020/05/01/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%91%E9%9D%A2%E8%AF%95%E9%A2%9816%E2%80%94%E2%80%94%20%E6%95%B0%E5%80%BC%E7%9A%84%E6%95%B4%E6%95%B0%E6%AC%A1%E6%96%B9/</url>
-    <content><![CDATA[<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1.题目"></a>1.题目</h2><p>​        <strong>实现函数double Power(double base, int exponent)，求base的exponent次方。不得使用库函数，同时不需要考虑大数问题。</strong></p>
-<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2.解法"></a>2.解法</h2><ol>
-<li><h4 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h4><p><strong>解题思路</strong>：我们可以将幂 <em>n</em> 表示成二进制的形式，比如若 <em>n</em> = 9，用二进制表示为 1001</p>
-<p>1001 = 1 x 1 + 0 x 2 + 0 x 4 + 1 x 8 = 1 x 2<sup>0</sup> + 0 x 2<sup>1</sup> + 0 x 2<sup>2</sup> + 1 x 2<sup>3</sup></p>
-</li>
-</ol>
-<p>​            x<sup>n</sup> = x<sup>9</sup> = x<sup>1x1</sup> + x<sup>0x2</sup> + x<sup>0x4</sup> + x<sup>1x8</sup></p>
-<p>   所以将 <em>n</em> 用二进制表示，可以通过位运算进行幂次计算。应用 &amp; 和 &gt;&gt; 可以得到 <em>n</em> 的每一位的 1。</p>
-<p>   <u>需要注意的是：<em>n</em> 为 <em>Int</em> 型，其存储范围为-2147483648~2147483647，我们将负值 <em>n</em> 转化成正值计算，如果 <em>n</em> = -2147483648，取绝对值则会产生越界情况，因此将 <em>n</em> 储存为 <em>long</em> 型。</u></p>
-<h5 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a><strong>代码实现</strong>：</h5>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">myPow</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> res = <span class="number">1.0</span>;</span><br><span class="line">           <span class="comment">//将n储存为long型，避免数值越界</span></span><br><span class="line">        <span class="keyword">long</span> b = n;</span><br><span class="line">           <span class="comment">//避免后续 x=1/x 报错</span></span><br><span class="line">        <span class="keyword">if</span>(x == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">           <span class="comment">//如果b&lt;0就转化为正值，方便后面统一计算</span></span><br><span class="line">        <span class="keyword">if</span>(b &lt; <span class="number">0</span>)&#123;</span><br><span class="line">               b = -b;</span><br><span class="line">               x = <span class="number">1</span> / x;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">while</span>(b &gt; <span class="number">0</span>)&#123;</span><br><span class="line">               <span class="comment">//</span></span><br><span class="line">               <span class="keyword">if</span>((b &amp; <span class="number">1</span>) == <span class="number">1</span>)&#123;</span><br><span class="line">                   res = res * x;</span><br><span class="line">               &#125;</span><br><span class="line">               x = x * x;</span><br><span class="line">               b = b &gt;&gt; <span class="number">1</span>;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">return</span> res;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>   <strong>时间复杂度</strong>：<em>O(log n)</em> （类似于二分法）</p>
-<p>   <strong>空间复杂度</strong>：<em>O(1)</em></p>
-<hr>
-<ol start="2">
-<li><h4 id="递归法"><a href="#递归法" class="headerlink" title="递归法"></a>递归法</h4><p><strong>解题思路</strong>：</p>
-<p>如果 x = 2, n = 8，x<sup>n</sup> = 2<sup>8</sup> = 2<sup>4</sup> * 2<sup>4</sup> = 2<sup>2</sup> * 2<sup>2</sup> * 2<sup>2</sup> * 2<sup>2</sup> = 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2</p>
-<p><strong>代码实现</strong>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">myPow</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(n == -<span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>/x;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">1</span>) <span class="keyword">return</span> x;</span><br><span class="line">        <span class="keyword">if</span>(n &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">double</span> temp = myPow(x, n/<span class="number">2</span>);</span><br><span class="line">            <span class="comment">//如果n为奇数，需要再多乘一个x</span></span><br><span class="line">            <span class="keyword">if</span>(n % <span class="number">2</span> == <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> temp * temp;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> temp * temp * x;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//如果n为int的最小值-2147483648，转换成最大值2147483647后还需要多乘一个x</span></span><br><span class="line">            <span class="keyword">if</span>(n == Integer.MIN_VALUE)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span> / (myPow(x, Integer.MAX_VALUE) * x);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span> / myPow(x, Math.abs(n));</span><br><span class="line">            &#125;</span><br><span class="line">     &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>时间复杂度</strong>：<em>O(log n)</em> </p>
-<p><strong>空间复杂度</strong>：<em>O(1)</em></p>
-</li>
-</ol>
-<p>​        </p>
-<p>​        </p>
-]]></content>
-      <tags>
-        <tag>位运算 递归</tag>
       </tags>
   </entry>
   <entry>
